@@ -62,23 +62,41 @@ h1 {
 .subtitle { color: var(--text-sub); margin-top: 10px; }
 footer { margin-top: 50px; text-align: center; font-size: 0.85rem; color: var(--text-sub); }
 
-/* 呼吸灯效果保持在全局 */
+/* 状态圆点基础样式 */
 .status-dot {
   display: inline-block;
-  width: 8px; height: 8px;
+  width: 8px;
+  height: 8px;
   background: var(--success);
   border-radius: 50%;
   position: relative;
+  vertical-align: middle; /* 确保小圆点和文字中线对齐 */
 }
+
+/* 呼吸灯效果校准 */
 .pulse::after {
-  content: ""; position: absolute;
-  width: 100%; height: 100%;
+  content: "";
+  position: absolute;
+  /* 关键修复：将扩散层拉回到中心 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 先位移再缩放 */
+  
+  width: 100%;
+  height: 100%;
   background: var(--success);
   border-radius: 50%;
   animation: ripple 2s infinite;
 }
+
 @keyframes ripple {
-  0% { transform: scale(1); opacity: 0.6; }
-  100% { transform: scale(3); opacity: 0; }
+  0% {
+    transform: translate(-50%, -50%) scale(1); /* 保持居中缩放 */
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
 }
 </style>
