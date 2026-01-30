@@ -1,0 +1,44 @@
+@media print {
+  /* 1. 核心：强制浏览器渲染你原本的所有颜色和背景 */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  /* 强行重置所有高度限制 */
+  html, body {
+    height: auto !important;
+    overflow: visible !important;
+    background-color: #edf1f6 !important;
+    background-image: none !important; /* 彻底移除渐变，防止干扰 */
+  }
+  html, body, #app, .container {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* 2. 只处理布局，不干扰颜色 */
+  @page {
+    size: A4;
+    margin: 1cm 1.2cm;
+  }
+ 
+  /* 3. 隐藏不需要的元素 */
+  .no-print, .download-btn, footer {
+    display: none !important;
+  }
+
+  /* 4. 确保 container 铺满纸张宽度 */
+  .container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important; /* 纸上不需要阴影，否则会印出一圈脏边 */
+  }
+
+  /* 5. 防止 card 被切断 */
+  .card, section {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}

@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <div class="download-btn no-print" @click="download">pdf下载</div>
     <header>
       <h1>CHRIS ZHOU</h1>
       <div class="subtitle">全栈开发工程师 · 自动化运维专家</div>
@@ -13,7 +14,7 @@
       :projects="myProjects" 
     />
 
-    <footer>
+    <footer class="no-print">
       <p><span class="status-dot pulse"></span> 系统状态: 已通过 GitHub Actions 自动部署</p>
       <p>© 2026 Chris Zhou. Powered by Nginx & GitHub Pages</p>
     </footer>
@@ -30,6 +31,9 @@ const myProjects = ref([
   { title: '多云容灾部署系统', desc: '基于 GitHub Actions 实现阿里云与 GitHub Pages 双向同步。' },
   { title: 'Shell 自动化工具箱', desc: '自研 Linux 环境初始化脚本。' }
 ])
+const download = () => {
+  window.print()
+}
 </script>
 
 <style>
@@ -50,7 +54,7 @@ body {
   min-height: 100vh;
 }
 
-.container { max-width: 900px; margin: 0 auto; }
+.container { max-width: 900px; margin: 0 auto;}
 header { text-align: center; margin-bottom: 50px; }
 h1 {
   font-size: 2.5rem;
@@ -80,5 +84,17 @@ footer { margin-top: 50px; text-align: center; font-size: 0.85rem; color: var(--
 @keyframes ripple {
   0% { transform: scale(1); opacity: 0.6; }
   100% { transform: scale(3); opacity: 0; }
+}
+.container .download-btn {
+  position: fixed;
+  top: 20px; right: 20px;
+  background: var(--primary);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
 }
 </style>
