@@ -2,7 +2,7 @@
   <div class="container">
     <header>
       <h1>CHRIS ZHOU</h1>
-      <div class="subtitle">全栈开发工程师 · 自动化运维专家</div>
+      <div class="subtitle">{{job}}开发工程师 · 自动化运维专家</div>
       <p>📧 contact@domain.com | 🔗 github.com/yourname</p>
     </header>
 
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref,computed } from 'vue'
 import SkillCard from './components/SkillCard.vue'
 import ProjectCard from './components/ProjectCard.vue'
 
@@ -30,6 +30,22 @@ const myProjects = ref([
   { title: '多云容灾部署系统', desc: '基于 GitHub Actions 实现阿里云与 GitHub Pages 双向同步。' },
   { title: 'Shell 自动化工具箱', desc: '自研 Linux 环境初始化脚本。' }
 ])
+const typeMap = {
+  full: '全栈',
+  backend: '后端',
+  fronted: '前端'
+}
+
+// 创建一个响应式变量
+const currentPath = ref(window.location.pathname)
+
+// 计算 job
+const job = computed(() => {
+  if (currentPath.value.includes('/full')) return typeMap.full
+  if (currentPath.value.includes('/backend')) return typeMap.backend
+  if (currentPath.value.includes('/fronted')) return typeMap.fronted
+  return typeMap.full
+})
 </script>
 
 <style>

@@ -45,5 +45,5 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "dist/*"
-          target: "/var/www/web/static"   # 远程服务器静态资源目录
+          target: "/var/www/web/static/resume"   # 远程服务器静态资源目录
           strip_components: 1
