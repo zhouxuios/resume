@@ -1,0 +1,1 @@
+import{n as e,t}from"./App-B2GTdy4L.js";e(t).mount(`#app`);
