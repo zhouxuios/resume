@@ -1,0 +1,1 @@
+import{n as e,t}from"./App-CQO872RJ.js";e(t).mount(`#app`);
