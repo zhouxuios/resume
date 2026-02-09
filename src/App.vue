@@ -2,16 +2,11 @@
   <div class="container">
     <header>
       <h1>CHRIS ZHOU</h1>
-      <div class="subtitle">{{job}}开发工程师 · 自动化运维专家</div>
+      <div class="subtitle">{{config.name}}开发工程师 · 自动化运维专家</div>
       <p>📧 contact@domain.com | 🔗 github.com/yourname</p>
     </header>
 
-    <SkillCard :skills="mySkills" />
-    
-    <ProjectCard 
-      sectionTitle="自动化运维实践" 
-      :projects="myProjects" 
-    />
+    <component :is="config.com"></component>
 
     <footer>
       <p><span class="status-dot pulse"></span> 系统状态: 已通过 GitHub Actions 自动部署</p>
@@ -22,25 +17,20 @@
 
 <script setup>
 import { ref,computed } from 'vue'
-import SkillCard from './components/SkillCard.vue'
-import ProjectCard from './components/ProjectCard.vue'
+import FullStack from './components/FullStack.vue'
+import Backend from './components/Backend.vue'
+import Fronted from './components/Fronted.vue'
 
-const mySkills = ref(['Java', 'GitHub Actions', 'Nginx', 'Shell', 'Vue.js', 'Docker'])
-const myProjects = ref([
-  { title: '多云容灾部署系统', desc: '基于 GitHub Actions 实现阿里云与 GitHub Pages 双向同步。' },
-  { title: 'Shell 自动化工具箱', desc: '自研 Linux 环境初始化脚本。' }
-])
 const typeMap = {
-  full: '全栈',
-  backend: '后端',
-  fronted: '前端'
+  full: { name: '全栈',com: FullStack },
+  backend: { name: '后端',com: Backend},
+  fronted: { name: '前端',com:Fronted}
 }
 
 // 创建一个响应式变量
 const currentPath = ref(window.location.pathname)
 
-// 计算 job
-const job = computed(() => {
+const config = computed(() => {
   if (currentPath.value.includes('/full')) return typeMap.full
   if (currentPath.value.includes('/backend')) return typeMap.backend
   if (currentPath.value.includes('/fronted')) return typeMap.fronted
